@@ -19,13 +19,19 @@ from groq import Groq
 load_dotenv()
 
 # ──────────────────────────────────────────────
-# Paths
+# Paths — works both locally and on Render
 # ──────────────────────────────────────────────
-# backend/app.py  →  go up one level  →  frontend/
-FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+# Local:  project root is smart-farming/  → frontend is ../frontend  relative to backend/
+# Render: rootDir is backend/             → frontend is ../frontend  relative to backend/
+#         BUT Render clones the whole repo, so parent.parent still resolves correctly.
+# We check both locations and use whichever exists.
+_here = Path(__file__).resolve().parent          # .../backend/
+_candidate_up   = _here.parent / "frontend"      # .../smart-farming/frontend  (local + Render)
+_candidate_same = _here / "frontend"             # .../backend/frontend  (fallback)
+FRONTEND_DIR = _candidate_up if _candidate_up.exists() else _candidate_same
 
 # ──────────────────────────────────────────────
-# App setup — serve static files from ../frontend
+# App setup — serve static files from frontend/
 # ──────────────────────────────────────────────
 app = Flask(__name__, static_folder=str(FRONTEND_DIR), static_url_path="")
 CORS(app)  # kept for dev flexibility
@@ -76,12 +82,20 @@ def build_prompt(farmer_name: str, location: str, crop: str,
     return system_prompt, user_prompt
 
 
+# Print resolved path at startup so Render logs show it clearly
+import sys
+print(f"[SmartFarm] FRONTEND_DIR = {FRONTEND_DIR}", flush=True)
+print(f"[SmartFarm] index.html exists = {(FRONTEND_DIR / 'index.html').exists()}", flush=True)
+
+
 # ──────────────────────────────────────────────
 # Route: GET /  → serve the frontend
 # ──────────────────────────────────────────────
 @app.route("/", methods=["GET"])
 def home():
     """Serve the frontend index.html from the ../frontend directory."""
+    if not (FRONTEND_DIR / "index.html").exists():
+        return f"ERROR: index.html not found at {FRONTEND_DIR}", 500
     return send_from_directory(str(FRONTEND_DIR), "index.html")
 
 
