@@ -1,0 +1,229 @@
+/* =============================================
+   SmartFarm AI — Global Styles
+   Theme: Green & White Agriculture
+   ============================================= */
+
+/* --- CSS Variables --- */
+:root {
+  --green-dark:   #1b5e20;
+  --green-main:   #2e7d32;
+  --green-mid:    #388e3c;
+  --green-light:  #e8f5e9;
+  --green-accent: #43a047;
+  --white:        #ffffff;
+  --text-dark:    #1f2328;
+  --text-muted:   #57606a;
+  --radius:       12px;
+  --transition:   0.25s ease;
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-dark);
+  background: var(--white);
+  scroll-behavior: smooth;
+}
+
+/* ---- Utility ---- */
+.text-green  { color: var(--green-main) !important; }
+.bg-green    { background-color: var(--green-main) !important; }
+.bg-light-green { background-color: var(--green-light) !important; }
+
+/* =============================================
+   NAVBAR
+   ============================================= */
+.navbar {
+  padding: 0.8rem 0;
+}
+.navbar-brand {
+  letter-spacing: 0.5px;
+}
+.navbar-nav .nav-link {
+  font-weight: 500;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  transition: background var(--transition);
+}
+.navbar-nav .nav-link:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* =============================================
+   HERO SECTION
+   ============================================= */
+.hero-section {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+  min-height: 92vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle leaf watermark */
+.hero-section::before {
+  content: "🌿";
+  font-size: 320px;
+  opacity: 0.04;
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.hero-icon i {
+  color: rgba(255,255,255,0.85);
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+.get-started-btn {
+  color: var(--green-dark);
+  font-size: 1.05rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.get-started-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+
+/* =============================================
+   SECTION TITLES
+   ============================================= */
+.section-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  position: relative;
+  display: inline-block;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  height: 4px;
+  width: 60px;
+  background: var(--green-accent);
+  border-radius: 4px;
+  margin: 8px auto 0;
+}
+
+/* =============================================
+   FEATURE CARDS
+   ============================================= */
+.feature-card {
+  border-radius: var(--radius) !important;
+  background: var(--white);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(46,125,50,0.12) !important;
+}
+.feature-icon i {
+  font-size: 2.4rem;
+  color: var(--green-main);
+}
+
+/* =============================================
+   FORM CARD
+   ============================================= */
+.form-card {
+  border-radius: var(--radius) !important;
+  background: var(--white);
+}
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 1.5px solid #d0e8d0;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--green-main);
+  box-shadow: 0 0 0 3px rgba(46,125,50,0.15);
+}
+.form-label { color: var(--text-dark); }
+
+/* =============================================
+   GREEN BUTTON
+   ============================================= */
+.btn-green {
+  background-color: var(--green-main);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  transition: background var(--transition), transform var(--transition);
+}
+.btn-green:hover, .btn-green:focus {
+  background-color: var(--green-dark);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+/* =============================================
+   CHAT / ADVICE BUBBLES
+   ============================================= */
+.chat-bubble {
+  border-radius: var(--radius);
+  padding: 1.2rem 1.5rem;
+}
+.user-bubble {
+  background: var(--white);
+  border: 1.5px solid #c8e6c9;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.ai-bubble {
+  background: var(--green-main);
+  color: var(--white);
+  box-shadow: 0 4px 16px rgba(46,125,50,0.25);
+}
+.bubble-header {
+  font-size: 0.85rem;
+  opacity: 0.82;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+.user-bubble .bubble-header {
+  color: var(--green-dark);
+  border-bottom-color: #c8e6c9;
+}
+
+/* Advice formatted text */
+.advice-content {
+  line-height: 1.8;
+  white-space: pre-line;
+  font-size: 0.97rem;
+}
+.advice-content strong { font-weight: 700; }
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.footer-section {
+  background: var(--green-dark);
+  border-top: 4px solid var(--green-accent);
+}
+
+/* =============================================
+   SPINNER OVERLAY  (inside button)
+   ============================================= */
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 2px;
+}
+
+/* =============================================
+   RESPONSIVE TWEAKS
+   ============================================= */
+@media (max-width: 576px) {
+  .hero-section { min-height: 80vh; }
+  .hero-section h1 { font-size: 1.8rem; }
+  .section-title  { font-size: 1.5rem; }
+  .form-card      { padding: 1.5rem !important; }
+  .btn-green      { width: 100%; }
+}
